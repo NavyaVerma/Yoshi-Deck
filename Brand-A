@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yoshi Studio - Social Media Assignment - Navya Verma</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --warm-white: #FAF7F2;
+    --ink: #1A1714;
+    --terracotta: #C4622D;
+    --gold: #B8942A;
+    --dusty-rose: #D4A5A0;
+    --sage: #8A9B7E;
+    --muted: #7A7168;
+    --border: #E0D8CC;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--warm-white);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* COVER */
+  .cover {
+    min-height: 100vh;
+    background: var(--ink);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 80px 100px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,148,42,0.12) 0%, transparent 70%);
+  }
+
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 200px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,98,45,0.1) 0%, transparent 70%);
+  }
+
+  .cover-tag {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 40px;
+  }
+
+  .cover h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 7vw, 88px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+
+  .cover h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .cover-sub {
+    font-size: 15px;
+    color: rgba(245,240,232,0.5);
+    margin-top: 28px;
+    letter-spacing: 0.5px;
+  }
+
+  .cover-meta {
+    position: absolute;
+    bottom: 80px;
+    right: 100px;
+    text-align: right;
+    font-size: 12px;
+    color: rgba(245,240,232,0.35);
+    letter-spacing: 1px;
+  }
+
+  .divider-line {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 32px 0;
+  }
+
+  /* SECTIONS */
+  section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 100px 60px;
+  }
+
+  section.full-bleed {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 40px;
+    color: var(--ink);
+  }
+
+  h2 em { font-style: italic; color: var(--terracotta); }
+
+  h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    letter-spacing: 0.3px;
+  }
+
+  p {
+    font-size: 15px;
+    color: #3D3830;
+    line-height: 1.85;
+    margin-bottom: 16px;
+  }
+
+  /* BRAND BRIEF BOX */
+  .brand-brief {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 56px 64px;
+    margin: 60px 0;
+    position: relative;
+  }
+
+  .brand-brief::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 200px;
+    color: rgba(184,148,42,0.08);
+    position: absolute;
+    top: -20px; left: 30px;
+    line-height: 1;
+  }
+
+  .brand-brief .brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .brand-brief p {
+    color: rgba(245,240,232,0.75);
+    font-size: 14px;
+    max-width: 600px;
+  }
+
+  .brand-brief .brand-essence {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 13px;
+    color: rgba(245,240,232,0.45);
+    letter-spacing: 0.5px;
+  }
+
+  /* PILLARS */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin: 40px 0;
+  }
+
+  .pillar {
+    background: var(--cream);
+    padding: 36px 32px;
+    border-left: 3px solid transparent;
+    transition: border-color 0.3s;
+  }
+
+  .pillar:nth-child(1) { border-left-color: var(--terracotta); }
+  .pillar:nth-child(2) { border-left-color: var(--gold); }
+  .pillar:nth-child(3) { border-left-color: var(--sage); }
+  .pillar:nth-child(4) { border-left-color: var(--dusty-rose); }
+
+  .pillar-emoji { font-size: 22px; margin-bottom: 12px; }
+  .pillar h3 { font-size: 18px; margin-bottom: 8px; }
+  .pillar p { font-size: 13.5px; margin-bottom: 0; color: var(--muted); }
+
+  /* CADENCE */
+  .cadence-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin: 40px 0;
+  }
+
+  .cadence-item {
+    background: var(--cream);
+    padding: 32px 28px;
+    text-align: center;
+  }
+
+  .cadence-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--terracotta);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .cadence-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* TREND BOX */
+  .trend-box {
+    border: 1px solid var(--border);
+    padding: 40px 44px;
+    margin: 40px 0;
+    position: relative;
+  }
+
+  .trend-box::before {
+    content: 'TREND TO TAP';
+    position: absolute;
+    top: -8px; left: 40px;
+    background: var(--warm-white);
+    padding: 0 12px;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold);
+  }
+
+  /* CALENDAR */
+  .calendar-section {
+    background: var(--cream);
+    padding: 80px 60px;
+  }
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+    margin-top: 48px;
+  }
+
+  .cal-day {
+    background: var(--warm-white);
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr 1fr;
+    gap: 0;
+    min-height: 100px;
+  }
+
+  .cal-day-num {
+    background: var(--ink);
+    color: var(--cream);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 10px;
+  }
+
+  .cal-day-num .day-name {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+    margin-bottom: 4px;
+  }
+
+  .cal-day-num .day-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1;
+  }
+
+  .cal-day:nth-child(2) .cal-day-num,
+  .cal-day:nth-child(4) .cal-day-num,
+  .cal-day:nth-child(6) .cal-day-num {
+    background: var(--terracotta);
+  }
+
+  .cal-cell {
+    padding: 20px 24px;
+    border-left: 1px solid var(--border);
+  }
+
+  .cal-cell-label {
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .cal-cell p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink);
+    margin-bottom: 0;
+  }
+
+  .format-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-radius: 2px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .badge-reel { background: rgba(196,98,45,0.12); color: var(--terracotta); }
+  .badge-carousel { background: rgba(184,148,42,0.12); color: var(--gold); }
+  .badge-story { background: rgba(138,155,126,0.15); color: var(--sage); }
+  .badge-static { background: rgba(212,165,160,0.2); color: #9A6B66; }
+
+  /* CAPTION SECTION */
+  .caption-section {
+    background: var(--ink);
+    padding: 80px 60px;
+  }
+
+  .caption-section .section-label { color: var(--gold); }
+  .caption-section h2 { color: var(--cream); }
+
+  .caption-post-ref {
+    display: inline-block;
+    background: rgba(245,240,232,0.08);
+    padding: 8px 18px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: rgba(245,240,232,0.5);
+    margin-bottom: 40px;
+  }
+
+  .caption-body {
+    background: rgba(245,240,232,0.05);
+    border-left: 2px solid var(--gold);
+    padding: 40px 48px;
+    max-width: 640px;
+  }
+
+  .caption-body p {
+    color: rgba(245,240,232,0.85);
+    font-size: 15px;
+    line-height: 2;
+    white-space: pre-line;
+  }
+
+  .caption-tags {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(245,240,232,0.1);
+    font-size: 13px;
+    color: rgba(245,240,232,0.35);
+    line-height: 2;
+  }
+
+  .caption-note {
+    margin-top: 40px;
+    max-width: 540px;
+  }
+
+  .caption-note h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .caption-note p {
+    font-size: 14px;
+    color: rgba(245,240,232,0.5);
+    line-height: 1.8;
+  }
+
+  /* PERFORMANCE */
+  .perf-section {
+    padding: 100px 60px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .diagnosis-steps {
+    margin: 40px 0;
+    counter-reset: steps;
+  }
+
+  .step {
+    display: flex;
+    gap: 28px;
+    margin-bottom: 32px;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--terracotta);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 3px;
+  }
+
+  .step-content h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    letter-spacing: 0;
+    color: var(--ink);
+  }
+
+  .step-content p { font-size: 14px; margin-bottom: 0; color: var(--muted); }
+
+  .action-box {
+    background: var(--cream);
+    border-top: 3px solid var(--terracotta);
+    padding: 40px 44px;
+    margin-top: 48px;
+  }
+
+  .action-box h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .action-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .action-list li {
+    font-size: 14px;
+    color: #3D3830;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .action-list li:last-child { border-bottom: none; }
+
+  .action-list li::before {
+    content: '→';
+    color: var(--terracotta);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* CLOSING */
+  .closing {
+    background: var(--ink);
+    padding: 80px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .closing-left h2 {
+    color: var(--cream);
+    font-size: 40px;
+    margin-bottom: 8px;
+  }
+
+  .closing-left p {
+    color: rgba(245,240,232,0.4);
+    font-size: 13px;
+  }
+
+  .closing-right {
+    text-align: right;
+    font-size: 12px;
+    color: rgba(245,240,232,0.25);
+    letter-spacing: 1px;
+  }
+
+  hr.section-break {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0 60px;
+  }
+
+  @media (max-width: 700px) {
+    .cover { padding: 60px 36px; }
+    section { padding: 60px 28px; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    .cadence-row { grid-template-columns: 1fr; }
+    .cal-day { grid-template-columns: 60px 1fr; grid-template-rows: auto auto auto; }
+    .closing { flex-direction: column; gap: 32px; padding: 60px 36px; }
+    .brand-brief { padding: 36px 28px; }
+    .caption-section { padding: 60px 28px; }
+    .calendar-section { padding: 60px 28px; }
+    .perf-section { padding: 60px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Yoshi Studio - Social Media Manager Assignment - Navya Verma</div>
+  <h1>The Quiet<br>Festival<em>.</em></h1>
+  <div class="divider-line"></div>
+  <p style="color:rgba(245,240,232,0.55); font-size:15px; max-width:460px; line-height:1.8;">
+    A 4-week Instagram strategy for a minimalist Indian homewear brand launching its first festive collection, where restraint becomes ceremony.
+  </p>
+  <div class="cover-meta">
+    Navya Verma <br>
+	Brand Archetype A<br>
+    Minimalist Indian Homewear
+  </div>
+</div>
+
+
+<!-- BRAND BRIEF -->
+<section>
+  <div class="section-label">Starting Point</div>
+  <h2>The Brand I'm Working With</h2>
+  <p>Before building a strategy, I always build a brand picture that grounds every content decision.</p>
+
+  <div class="brand-brief">
+    <div class="brand-name">Ghar.</div>
+    <p>A minimalist Indian homewear label rooted in slow living. Natural fabrics, muted palettes, craft-forward production. Their aesthetic sits at the intersection of Indian heritage and contemporary restraint - block-print meets Brutalism.</p>
+    <p style="margin-top:12px">Their audience: urban, design-literate Indian millennials who find Diwali decor overwhelming and are looking for a version of the festive season that feels like them.</p>
+    <div class="brand-essence">
+      Brand Voice: Calm. Intentional. Warm without being loud. &nbsp;|&nbsp; Tone: Like a letter from a friend with good taste.
+    </div>
+  </div>
+
+  <p>Everything below is built for this brand. The strategic principles, however, apply to any minimalist homewear brand in this space.</p>
+</section>
+
+<hr class="section-break">
+
+
+<!-- STRATEGY SNAPSHOT -->
+<section>
+  <div class="section-label">Section 01 — Strategy</div>
+  <h2>Instagram Strategy<br><em>Snapshot</em></h2>
+  <p>Four weeks. One launch. The approach isn't to flood feeds, but to build the kind of quiet anticipation that makes people feel like they discovered something.</p>
+
+  <div style="margin: 40px 0 28px">
+    <h3 style="font-family:'DM Sans',sans-serif; font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:20px;">Content Pillars</h3>
+  </div>
+
+  <div class="pillars-grid">
+    <div class="pillar">
+      <div class="pillar-emoji">🪔</div>
+      <h3>The Collection</h3>
+      <p>Product-led content that shows how pieces live in real spaces. Never just product shots, always context. Mood over catalogue.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-emoji">🧵</div>
+      <h3>The Craft</h3>
+      <p>Behind-the-material storytelling. Where the fabric comes from, how it's made, what makes it different from fast-homewear. Builds trust before purchase.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-emoji">🏠</div>
+      <h3>The Ritual</h3>
+      <p>How people actually use this stuff. Setting a table. Morning chai. An evening with candles lit. Sells the life, not the product.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-emoji">💬</div>
+      <h3>The Conversation</h3>
+      <p>Community touchpoints - prompts, polls, responses. "How do you celebrate quietly?" This pillar builds belonging, not just following.</p>
+    </div>
+  </div>
+
+  <div style="margin: 56px 0 24px">
+    <h3 style="font-family:'DM Sans',sans-serif; font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:20px;">Posting Cadence</h3>
+  </div>
+
+  <div class="cadence-row">
+    <div class="cadence-item">
+      <div class="cadence-num">5×</div>
+      <div class="cadence-label">Posts per week</div>
+      <p style="font-size:12px; color:var(--muted); margin-top:10px; margin-bottom:0;">Consistent enough to build habit. Sparse enough to feel intentional.</p>
+    </div>
+    <div class="cadence-item">
+      <div class="cadence-num">3–4×</div>
+      <div class="cadence-label">Stories per day</div>
+      <p style="font-size:12px; color:var(--muted); margin-top:10px; margin-bottom:0;">Stories carry the personality: behind-the-scenes, polls, quick moments.</p>
+    </div>
+    <div class="cadence-item">
+      <div class="cadence-num">2×</div>
+      <div class="cadence-label">Reels per week</div>
+      <p style="font-size:12px; color:var(--muted); margin-top:10px; margin-bottom:0;">Used for reach, not for clout. Quiet, cinematic, no jump cuts.</p>
+    </div>
+  </div>
+
+  <div style="margin: 56px 0 24px">
+    <h3 style="font-family:'DM Sans',sans-serif; font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:4px;">Format Mix</h3>
+  </div>
+
+  <p>
+    <strong>Carousels (40%)</strong> — Great for storytelling, saves, and reach. Used for craft narratives, collection reveals, and "how to style" content.<br><br>
+    <strong>Reels (30%)</strong> — Drives reach. Shot like short films: slow zooms, natural light, ambient sound. Never trending audio that doesn't fit the brand.<br><br>
+    <strong>Static + Stories (30%)</strong> — Single images for mood-setting. Stories for conversation, polls, and humanising the brand.
+  </p>
+
+  <div class="trend-box">
+    <h3 style="margin-bottom:12px;">Trend: "Slow Festive" Content</h3>
+    <p style="margin-bottom:12px;">There's a growing counter-reaction on Instagram to the maximalist Diwali content that saturates feeds every October - too much glitter, too many transitions, too loud. Creators and small brands are finding real traction with a quieter aesthetic: single-take videos, natural light, no music or very understated ambient sound.</p>
+    <p style="margin-bottom:0; color:var(--muted); font-size:14px;">
+      <strong>Why it works for this brand:</strong> It's not a trend they're chasing, but one that's catching up to them. Their minimalist DNA is already aligned. A single Reel of a diya being lit next to a linen table runner, shot in golden hour, no voiceover, will feel deeply intentional while also tapping into a format that's performing.
+    </p>
+  </div>
+
+  <div style="background:var(--cream); padding:28px 32px; margin-top:16px; border-left: 3px solid var(--sage);">
+    <h3 style="font-family:'DM Sans'; font-size:13px; letter-spacing:1px; text-transform:uppercase; font-weight:500; margin-bottom:8px;">4-Week Arc</h3>
+    <p style="font-size:13.5px; margin-bottom:6px; color:var(--ink)"><strong>Week 1:</strong> Tease - mood content, "something is coming", craft story.</p>
+    <p style="font-size:13.5px; margin-bottom:6px; color:var(--ink)"><strong>Week 2:</strong> Reveal - collection launch, hero pieces, shopping-linked content.</p>
+    <p style="font-size:13.5px; margin-bottom:6px; color:var(--ink)"><strong>Week 3:</strong> Deepen - styling, ritual content, UGC encouragement.</p>
+    <p style="font-size:13.5px; margin-bottom:0; color:var(--ink)"><strong>Week 4:</strong> Close - last-chance messaging, community moments, post-festive warmth.</p>
+  </div>
+</section>
+
+<hr class="section-break">
+
+
+<!-- CONTENT CALENDAR -->
+<div class="calendar-section">
+  <div style="max-width:900px; margin:0 auto;">
+    <div class="section-label">Section 02 — Content</div>
+    <h2>6-Day Content<br><em>Calendar</em></h2>
+    <p style="max-width:580px;">Set in Week 2, the launch week. The collection has just been revealed; now we layer in story, desire, and conversation.</p>
+
+    <div class="calendar-grid">
+
+      <!-- Day 1 -->
+      <div class="cal-day">
+        <div class="cal-day-num">
+          <div class="day-name">MON</div>
+          <div class="day-number">01</div>
+        </div>
+        <div class="cal-cell">
+          <div class="cal-cell-label">Format</div>
+          <span class="format-badge badge-reel">Reel</span>
+          <p>60-sec launch film</p>
+        </div>
+        <div class="cal-cell">
+          <div class="cal-cell-label">Visual Concept</div>
+          <p>Single-take golden-hour walkthrough of a styled room. Diya lit. Linen curtain moving slightly. No voiceover, only ambient sound and a single low note of music at the end.</p>
+        </div>
+        <div class="cal-cell">
+          <div class="cal-cell-label">Caption Direction</div>
+          <p>Minimal. Two lines: "The festive season, the way you want it." + "Shop the Utsav Collection - link in bio." Let the video do the talking.</p>
+        </div>
+      </div>
+
+      <!-- Day 2 -->
+      <div class="cal-day">
+        <div class="cal-day-num">
+          <div class="day-name">TUE</div>
+          <div class="day-number">02</div>
+        </div>
+        <div class="cal-cell">
+          <div class="cal-cell-label">Format</div>
+          <span class="format-badge badge-carousel">Carousel</span>
+          <p>6-slide product story</p>
+        </div>
+        <div class="cal-cell">
+          <div class="cal-cell-label">Visual Concept</div>
+          <p>Each slide = one hero piece. Flat lay on textured stone or natural wood. Tight crops. Slide 6 shows all pieces together in a room, the full picture after parts.</p>
+        </div>
+        <div class="cal-cell">
+          <div class="cal-cell-label">Caption Direction</div>
+          <p>Name the collection pieces with one sentence each on what inspired them. End with: "Swipe through the Utsav Collection." Educate, don't sell.</p>
+        </div>
+      </div>
+
+      <!-- Day 3 -->
+      <div class="cal-day">
+        <div class="cal-day-num">
+          <div class="day-name">WED</div>
+          <div class="day-number">03</div>
+        </div>
+        <div class="cal-cell">
+          <div class="cal-cell-label">Format</div>
+          <span class="format-badge badge-static">Static</span>
+          <p>Single image</p>
+        </div>
+        <div class="cal-cell">
+          <div class="cal-cell-label">Visual Concept</div>
+          <p>Close-up texture shot of the hero fabric, the weave visible, a hand resting lightly on it. Warm but clinical. More like a photograph than a post.</p>
+        </div>
+        <div class="cal-cell">
+          <div class="cal-cell-label">Caption Direction</div>
+          <p>A small craft story: where this textile comes from, what artisans made it. Intimate, 80 words max. No hard sell, this is the "why it's worth it" post.</p>
+        </div>
+      </div>
+
+      <!-- Day 4 -->
+      <div class="cal-day">
+        <div class="cal-day-num">
+          <div class="day-name">THU</div>
+          <div class="day-number">04</div>
+        </div>
+        <div class="cal-cell">
+          <div class="cal-cell-label">Format</div>
+          <span class="format-badge badge-carousel">Carousel</span>
+          <p>"How to style" guide</p>
+        </div>
+        <div class="cal-cell">
+          <div class="cal-cell-label">Visual Concept</div>
+          <p>3 different home setups — compact apartment, open-plan, traditional home, each styled with pieces from the collection. Shows versatility without a single word of copy on-image.</p>
+        </div>
+        <div class="cal-cell">
+          <div class="cal-cell-label">Caption Direction</div>
+          <p>Conversational header: "Three homes. One collection." Short styling note for each setup. Ends with a question: "Which feels most like yours?" This drives comments.</p>
+        </div>
+      </div>
+
+      <!-- Day 5 -->
+      <div class="cal-day">
+        <div class="cal-day-num">
+          <div class="day-name">FRI</div>
+          <div class="day-number">05</div>
+        </div>
+        <div class="cal-cell">
+          <div class="cal-cell-label">Format</div>
+          <span class="format-badge badge-reel">Reel</span>
+          <p>"Morning ritual" video</p>
+        </div>
+        <div class="cal-cell">
+          <div class="cal-cell-label">Visual Concept</div>
+          <p>A real morning in a home - chai being made, table runner visible, diffused window light. Under 30 seconds. Feels found, not staged. The product is present but never centred.</p>
+        </div>
+        <div class="cal-cell">
+          <div class="cal-cell-label">Caption Direction</div>
+          <p>"This is what we made it for." Short. Evocative. No product name in caption, the link in bio handles that. This post sells the feeling, not the SKU.</p>
+        </div>
+      </div>
+
+      <!-- Day 6 -->
+      <div class="cal-day">
+        <div class="cal-day-num">
+          <div class="day-name">SAT</div>
+          <div class="day-number">06</div>
+        </div>
+        <div class="cal-cell">
+          <div class="cal-cell-label">Format</div>
+          <span class="format-badge badge-story">Story Series</span>
+          <p>5-part story poll</p>
+        </div>
+        <div class="cal-cell">
+          <div class="cal-cell-label">Visual Concept</div>
+          <p>Minimally designed story cards (brand palette, no clutter). Each card has one question about how their audience celebrates. "Do you decorate or keep it spare?" etc.</p>
+        </div>
+        <div class="cal-cell">
+          <div class="cal-cell-label">Caption Direction</div>
+          <p>N/A (Stories). Final card compiles a community answer and directs to a saved highlight called "How You Celebrate." Builds community data + connection.</p>
+        </div>
+      </div>
+
+    </div><!-- end calendar-grid -->
+  </div>
+</div>
+
+
+<!-- CAPTION -->
+<div class="caption-section">
+  <div style="max-width:900px; margin:0 auto; padding:0 0;">
+    <div class="section-label">Section 03 — Voice</div>
+    <h2>The Full Caption</h2>
+    <div class="caption-post-ref">Day 03 — Craft Story / Static Image</div>
+
+    <div class="caption-body">
+      <p>There is a particular kind of quiet that lives in well-made things. Not the absence of sound, but the sense that something took its time.
+
+This fabric was woven in Chanderi. The same town, the same looms, for centuries. What you're touching when you run your hand across it isn't just textile, it's a process that hasn't needed to change because it never cut corners to begin with.
+
+We built the Utsav Collection around pieces like this. Not to make your home louder for the season, but to give it a kind of presence.
+The kind that stays after the diyas go out.
+.
+
+Shop the Utsav Collection today! LINK IN BIO.
+
+[Diwali, Festive, Indian Apparel, IndianFashion, MakeInIndia]
+</p>
+    </div>
+
+    <!-- <div class="caption-tags">
+      #SlowLiving &nbsp; #IndianHomewear &nbsp; #MinimalistFestive &nbsp; #Chanderi &nbsp; #UtsavCollection &nbsp; #MadeInIndia &nbsp; #FestiveDecor &nbsp; #ConsciousHome &nbsp; #Ghar
+    </div> -->
+
+    <div class="caption-note">
+      <h3>Why this caption works</h3>
+      <p>- It opens with feeling, not product. The Chanderi reference is specific, that builds credibility. <br>
+	  - The rhythm slows down intentionally, mirroring the brand's pace. <br>
+	  - The detailed description makes sure the caption is search-engine optimized, so that it can rank higher in appearance on searches made outside as well as inside Instagram. <br>
+	  - The full stop before the CTA creates a clean pause, so the purchase moment doesn't interrupt the story, it follows it. <br>
+	  - Square bracket tags are used in place of hashtags, since they do not make sure of the visibility after the recent algorithm update, and the risk of banned hashtags makes me want to be more cautious.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- PERFORMANCE -->
+<div style="background: var(--warm-white);">
+  <div class="perf-section">
+    <div class="section-label">Section 04 — Analysis</div>
+    <h2>Reels Are Underperforming.<br><em>What Now?</em></h2>
+    <p style="max-width:600px;">Two weeks in, Reels have lower reach-to-engagement conversion than carousels. Here's how I would tackle it.</p>
+
+    <div style="margin: 40px 0 16px">
+      <h3 style="font-family:'DM Sans'; font-size:13px; letter-spacing:2px; text-transform:uppercase; font-weight:500; color:var(--muted);">Diagnosis First</h3>
+    </div>
+
+    <div class="diagnosis-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Separate reach from engagement</h3>
+          <p>Reels might be reaching more accounts but not converting to profile visits or saves. Or they might be getting skipped quickly making high impressions, but low watch-through. These are different problems. I'd pull watch time data, exit points, and compare saves-per-reach across formats before drawing any conclusion.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Check the audience mismatch</h3>
+          <p>Reels push to non-followers. If the Reels are reaching people outside the brand's target who aren't design-literate urban millennials, the engagement drop is expected. I'd check the audience demographics on Reel vs carousel reach to see if we're attracting the right people, not just more people.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Audit the first 3 seconds</h3>
+          <p>For this brand's slow, cinematic approach, the first frame might not be stopping thumbs in a fast-scroll context. This doesn't mean the content is wrong, it might mean the hook needs rethinking. Does the opening frame have a visual tension or question that earns the watch?</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>Consider the nature of the product</h3>
+          <p>Homewear may simply be a carousel category. People save and return to "how to style" content. Reels are better for brand feeling, carousels for purchase intent. It is possible both are working, just at different parts of the funnel.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-box">
+      <h3>What I'd Do Next</h3>
+      <ul class="action-list">
+        <li>Run one A/B Reel test: same content, different opening frames. One starts on a product, one starts on a person. Track 3-second retention and compare.</li>
+        <li>Don't abandon Reels, but recalibrate their job. If carousels are driving saves and site visits, let Reels handle brand discovery (reach). Stop expecting them to do the same thing.</li>
+        <li>Try a shorter Reel format (under 20 seconds) for one week. This audience may want long-form content via carousel, not video.</li>
+        <li>Add a clear micro-CTA at the 5-second mark — not a hard sell, but a visual or text cue that rewards the viewer for staying. Something as simple as "swipe to see the full space" in caption.</li>
+        <li>Revisit audio. If Reels are using music, test one with only ambient sound. If ambient, test one with a well-matched, on-trend audio that still fits the brand.</li>
+        <li>Report back to the client with a hypothesis, not just data. "Reels are our discovery engine; carousels are our conversion engine" is a strategic frame they can act on.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- CLOSING -->
+<div class="closing">
+  <div class="closing-left">
+    <h2>That's the thinking.</h2>
+    <p style="color:rgba(245,240,232,0.45); font-size:14px; max-width:400px; line-height:1.8; margin-top:12px;">
+      Strategy is only as good as the instincts behind it. The calendar, the caption, the diagnosis, they're all built on the same belief: that the best social media for a brand like this feels like it comes from a real person who genuinely loves what they're selling.
+    </p>
+  </div>
+  <div class="closing-right">
+    Prepared for Yoshi Studio by Navya Verma<br>
+    Social Media Manager Assignment<br>
+    Brand Archetype A
+  </div>
+</div>
+
+</body>
+</html>
